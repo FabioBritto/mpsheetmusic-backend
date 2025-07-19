@@ -5,6 +5,7 @@ import { Music } from "../../domain/entity/music-entity";
 import { MusicDomainServiceImpl } from "../../domain/services/music-domain.service";
 import { UpdateMusicDTO } from "../../presenter/dtos/update-music-dto";
 import { UpdateMusicUseCase } from "../use-cases/update.music-usecase";
+import { UpdateResult } from "typeorm";
 
 @Injectable()
 export class MusicApplicationService {
@@ -28,7 +29,7 @@ export class MusicApplicationService {
         }
     }
 
-    async update(id: number, dto: UpdateMusicDTO) {
+    async update(id: number, dto: UpdateMusicDTO): Promise<UpdateResult> {
         try {
             return await this.updateMusicUseCase.execute(id, dto);
         } catch (error) {

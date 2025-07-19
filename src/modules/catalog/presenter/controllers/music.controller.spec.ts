@@ -78,6 +78,11 @@ describe('MusicController', () => {
         musicApplicationService = module.get<MusicApplicationService>(MusicApplicationService);
     });
 
+    // Limpa todos os mocks após cada teste
+    afterEach(() => {
+        jest.clearAllMocks(); // Limpa o histórico de chamadas dos mocks
+    });
+
     // Teste para verificar se o controller foi criado corretamente
     it('should be defined', () => {
         expect(musicController).toBeDefined(); // Verifica se o controller existe
@@ -225,15 +230,5 @@ describe('MusicController', () => {
         });
     });
 
-    // Suite de testes para verificar se os mocks são limpos após cada teste
-    describe('mock cleanup', () => {
-        // Teste para verificar se os mocks são limpos corretamente
-        it('should clear mocks after each test', () => {
-            // Verifica se os mocks foram limpos (não foram chamados)
-            expect(mockMusicApplicationService.create).not.toHaveBeenCalled();
-            expect(mockMusicApplicationService.update).not.toHaveBeenCalled();
-            expect(mockMusicApplicationService.findAll).not.toHaveBeenCalled();
-            expect(mockMusicApplicationService.findOneById).not.toHaveBeenCalled();
-        });
-    });
+
 }); 

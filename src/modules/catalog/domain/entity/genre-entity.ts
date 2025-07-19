@@ -8,7 +8,7 @@ export class Genre {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
     name: string;
 
     @ManyToMany(() => Music, music => music.genres)

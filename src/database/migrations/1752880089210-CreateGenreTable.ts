@@ -20,6 +20,7 @@ export class CreateGenreTable1752880089210 implements MigrationInterface {
                         type: 'varchar',
                         length: '255',
                         isNullable: false,
+                        isUnique: true,
                     }
                 ]
             })
