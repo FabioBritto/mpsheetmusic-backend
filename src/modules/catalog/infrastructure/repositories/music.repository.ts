@@ -20,6 +20,10 @@ export class MusicRepository {
         return await this.musicRepository.update(options.filter, options.update);
     }
 
+    async findOne(filter: FindOptionsWhere<Music>): Promise<Music | null> {
+        return this.musicRepository.findOne({ where: filter });
+    }
+
     async findOneById(id: number): Promise<Music | null> {
         return this.musicRepository.findOne({ where: { id } });
     }

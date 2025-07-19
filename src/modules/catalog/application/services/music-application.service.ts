@@ -1,9 +1,10 @@
 import { BadRequestException, Inject, Injectable } from "@nestjs/common";
-import { CreateMusicUseCase } from "../use-cases/create-music-use-case";
+import { CreateMusicUseCase } from "../use-cases/create.music-usecase";
 import { CreateMusicDTO } from "../../presenter/dtos/create-music-dto";
 import { Music } from "../../domain/entity/music-entity";
 import { MusicDomainServiceImpl } from "../../domain/services/music-domain.service";
 import { UpdateMusicDTO } from "../../presenter/dtos/update-music-dto";
+import { UpdateMusicUseCase } from "../use-cases/update.music-usecase";
 
 @Injectable()
 export class MusicApplicationService {
@@ -12,6 +13,8 @@ export class MusicApplicationService {
         private readonly createMusicUseCase: CreateMusicUseCase,
         @Inject('MusicDomainService')
         private readonly musicDomainService: MusicDomainServiceImpl,
+        @Inject('UpdateMusicUseCase')
+        private readonly updateMusicUseCase: UpdateMusicUseCase,
     ) {}
 
     async create(dto: CreateMusicDTO): Promise<Music> {
@@ -26,7 +29,14 @@ export class MusicApplicationService {
     }
 
     async update(id: number, dto: UpdateMusicDTO) {
-        return null;
+        try {
+            return await this.updateMusicUseCase.execute(id, dto);
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new BadRequestException(error.message || 'We have a problem to update this music!');
+            }
+            throw error;
+        }
     }
 
     async findAll(): Promise<Music[]> {

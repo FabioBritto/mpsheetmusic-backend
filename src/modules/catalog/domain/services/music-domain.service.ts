@@ -3,7 +3,9 @@ import { Music } from "../entity/music-entity";
 import { FindOptionsWhere, UpdateResult } from "typeorm";
 import { MusicRepository } from "../../infrastructure/repositories/music.repository";
 import { CreateMusicDTO } from "../../presenter/dtos/create-music-dto";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class MusicDomainServiceImpl implements MusicDomainService {
     constructor(
         private readonly musicRepository: MusicRepository,
@@ -19,8 +21,11 @@ export class MusicDomainServiceImpl implements MusicDomainService {
         throw new Error("Method not implemented.");
     }
 
+    findOne(filter: FindOptionsWhere<Music>): Promise<Music | null> {
+        return this.musicRepository.findOne(filter);
+    }
 
-    findOneById(id: number): Promise<Music | null> {
+    findOneById(id: number) {
         return this.musicRepository.findOneById(id);
     }
 

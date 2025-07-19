@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateVersionTable1752879737841 implements MigrationInterface {
+export class CreateGenreTable1752880089210 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-    
+
         await queryRunner.createTable(
             new Table({
-                name: 'versions',
+                name: 'genres',
                 columns: [
                     {
                         name: 'id',
@@ -20,11 +20,6 @@ export class CreateVersionTable1752879737841 implements MigrationInterface {
                         type: 'varchar',
                         length: '255',
                         isNullable: false,
-                    },
-                    {
-                        name: 'number_of_instruments',
-                        type: 'int',
-                        isNullable: false,
                     }
                 ]
             })
@@ -32,7 +27,8 @@ export class CreateVersionTable1752879737841 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('versions');
+
+        await queryRunner.dropTable('genres');
     }
 
 }

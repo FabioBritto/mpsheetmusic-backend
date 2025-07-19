@@ -1,4 +1,4 @@
-import { CreateMusicUseCase } from "../../application/use-cases/create-music-use-case";
+import { CreateMusicUseCase } from "../../application/use-cases/create.music-usecase";
 
 export const CreateMusicUseCaseProvider = {
     provide: 'CreateMusicUseCase',

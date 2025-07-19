@@ -4,9 +4,10 @@ import { MusicController } from "../presenter/controllers/music.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule } from "@nestjs/config";
-import { CreateMusicUseCaseProvider } from "./providers/create-music.usecase.provider";
+import { CreateMusicUseCaseProvider } from "./providers/create.music-usecase-provider";
 import { MusicDomainProvider } from "./providers/music.domain.provider";
 import { Genre } from "../domain/entity/genre-entity";
+import { UpdateMusicUseCaseProvider } from "./providers/update.music-usecase-provider";
 
 @Module({
     imports: [
@@ -26,5 +27,6 @@ import { Genre } from "../domain/entity/genre-entity";
     providers: [
         CreateMusicUseCaseProvider,
         MusicDomainProvider,
+        UpdateMusicUseCaseProvider,
     ],
 }) export class MusicModule {}
