@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository, UpdateResult } from "typeorm";
+import { FindOptionsWhere, Repository, UpdateResult } from "typeorm";
 import { Genre } from "../../domain/entity/genre-entity";
 
 @Injectable()
@@ -28,8 +28,8 @@ export class GenreRepository {
         return this.genreRepository.save(newGenre);
     }
 
-    async update(id: number, genre: Partial<Genre>): Promise<UpdateResult> {
-        return await this.genreRepository.update(id, genre);
+    async update({ filter, update }: { filter: FindOptionsWhere<Genre>; update: Partial<Genre>; }): Promise<UpdateResult> {
+        return await this.genreRepository.update(filter, update);
     }
 
     async delete(id: number): Promise<void> {

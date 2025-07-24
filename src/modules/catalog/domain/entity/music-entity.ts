@@ -1,8 +1,13 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Arranger } from "../enums/arranger-enum";
 import { SheetMusic } from "./sheet.music-entity";
-import { MusicGenre } from "./relation/music.genre-entity";
 import { Genre } from "./genre-entity";
+
+/**
+ *  Esta entidade representa a música em si, não a versão e nem a partitura.
+ *  Exemplo: "Ave Maria - Franz Schubert".
+ *  Ela terá as informações básicas da música, como título, artista, compositor, etc.	
+ */
 
 @Entity('musics')
 export class Music {
@@ -26,19 +31,6 @@ export class Music {
     arranger: Arranger;
 
     @ManyToMany(() => Genre, genre => genre.musics)
-    @JoinTable({
-        name: 'music_genre',
-        joinColumn: 
-        {
-            name: 'music_id',
-            referencedColumnName: 'id',
-        },
-        inverseJoinColumn: 
-        {
-            name: 'genre_id',
-            referencedColumnName: 'id',
-        },
-    })
     genres: Genre[];
 
     @OneToMany(() => SheetMusic, sheetMusic => sheetMusic.music)

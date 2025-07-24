@@ -18,7 +18,7 @@ export class MusicDomainServiceImpl implements MusicDomainService {
 
 
     update({ filter, update }: { filter: FindOptionsWhere<Music>; update: Partial<Music>; }): Promise<UpdateResult> {
-        throw new Error("Method not implemented.");
+        return this.musicRepository.update({filter, update});
     }
 
     findOne(filter: FindOptionsWhere<Music>): Promise<Music | null> {

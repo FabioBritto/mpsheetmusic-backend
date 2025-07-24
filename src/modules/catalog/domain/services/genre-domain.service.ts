@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { GenreDomainInterface } from "../interfaces/genre-domain.interface";
 import { Genre } from "../entity/genre-entity";
-import { UpdateResult } from "typeorm";
+import { FindOptionsWhere, UpdateResult } from "typeorm";
 import { GenreRepository } from "../../infrastructure/repositories/genre.repository";
 
 @Injectable()
@@ -23,8 +23,8 @@ export class GenreDomainServiceImpl implements GenreDomainInterface {
         return this.genreRepository.create(genre);
     }
 
-    async update(id: number, genre: Partial<Genre>): Promise<UpdateResult> {
-        return this.genreRepository.update(id, genre);
+    async update({ filter, update }: { filter: FindOptionsWhere<Genre>; update: Partial<Genre>; }): Promise<UpdateResult> {
+        return this.genreRepository.update({filter, update});
     }
 
     async delete(id: number): Promise<void> {

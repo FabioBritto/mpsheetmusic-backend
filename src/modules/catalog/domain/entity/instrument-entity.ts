@@ -1,7 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany } from 'typeorm';
 import { InstrumentFamily } from '../enums/instrument.family-enum';
-import { Version } from './version-entity';
+import { Instrumentation } from './instrumentation-entity';
 
+/**
+ *  Esta entidade representa um instrumento musical.
+ *  Exemplo: "Violino", "Violoncelo", "Violão", etc.
+ */
 
 @Entity('instruments')
 export class Instrument {
@@ -14,6 +18,6 @@ export class Instrument {
     @Column({ name: 'family', type: 'enum', enum: InstrumentFamily})
     family: InstrumentFamily;
 
-    @ManyToOne(() => Version, version => version.instruments)
-    version: Version;
+    @ManyToMany(() => Instrumentation, instrumentation => instrumentation.instruments)
+    instrumentations: Instrumentation[];
 }

@@ -1,6 +1,10 @@
-import { Column, Entity, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { MusicGenre } from "./relation/music.genre-entity";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Music } from "./music-entity";
+
+/**
+ *  Esta entidade representa um gênero musical.
+ *  Exemplo: "Clássico", "Jazz", "Pop", etc.
+ */
 
 @Entity('genres')
 export class Genre {
